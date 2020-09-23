@@ -119,23 +119,18 @@ function checkAnswer() {
 
     i++;
 
-    console.log(score);
-
     if (i === quizQuestions.length) {
         quiz.classList.add("d-none");
         displayScore.classList.remove("d-none");
 
         i = 0;
-        
+
         nextQuestion();
-        saveScore();
     } else {
 
         nextQuestion();
     }
 };
-
-
 
 function scoreBoard(){
     alert("GAME OVER");
@@ -146,6 +141,18 @@ function scoreBoard(){
 };
 
 function saveScore(){
+
+    var newRow = document.createElement("div");
+    newRow.textContent = "test";
+    newRow.setAttribute("class", "row bg-light");
+    document.getElementById("playerScores").insertBefore(newRow, document.getElementById("playerScores").children[2]);
+    console.log(newRow.textContent);
+
+    
+
+
+
+
 
     // // player name from input field 
 
@@ -160,7 +167,7 @@ function saveScore(){
 
 
 startBtn.addEventListener("click", function(){
-    startBtn.classList.add("d-none");
+    startQuiz.classList.add("d-none");
     quiz.classList.remove("d-none");
 
 });
@@ -171,6 +178,7 @@ tryAgainBtn.addEventListener("click", function(){
 
 });
 
+submitScoreBtn.addEventListener("click", saveScore);
 submitScoreBtn.addEventListener("click", function(){
     displayScore.classList.add("d-none");
     playerScores.classList.remove("d-none");
@@ -185,5 +193,3 @@ aFourBtn.addEventListener("click", checkAnswer);
 
 
 nextQuestion();
-
-
