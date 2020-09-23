@@ -8,7 +8,7 @@ var quizQuestions = [
 
     {
         question: "What is the first phase of the Hunter Exam?",
-        options: ["A long run ", "A fight to the death", "A treasure hunt", "A cooking competition"],
+        options: ["A long run", "A fight to the death", "A treasure hunt", "A cooking competition"],
         answer: "A long run",
     },
 
@@ -62,40 +62,54 @@ var quizQuestions = [
 
 ];
 
-var score = 0;
+var quiz = document.getElementById("quiz");
 
-var timer = 180;
+var displayScore = document.getElementById("displayScore");
+var submitScoreBtn = document.getElementById("submitScore");
 
-var index = 0;
+var startQuiz = document.getElementById("startQuiz");
+var startBtn = document.getElementById("startBtn");
 
+var playerScores = document.getElementById("playerScores");
+var tryAgainBtn = document.getElementById("tryAgain");
+
+var questionDisplay = document.getElementById("questionDisplay");
 var aOneBtn = document.getElementById("aOneDisplay");
 var aTwoBtn = document.getElementById("aTwoDisplay");
 var aThreeBtn = document.getElementById("aThreeDisplay");
 var aFourBtn = document.getElementById("aFourDisplay");
 
+var score = 0;
+var timer = 180;
+var i = 0;
+
 function nextQuestion() {
-    var currentQuestion = quizQuestions[index];
+    var currentQuestion = quizQuestions[i];
 
-    document.getElementById("questionDisplay").textContent = currentQuestion.question;
+    questionDisplay.textContent = currentQuestion.question;
 
+    //can include event delegation to clean up code//
+
+    //displays and sets value of question 1
     aOneBtn.textContent = currentQuestion.options[0];
     aOneBtn.value = currentQuestion.options[0];
 
+    //displays and sets value of question 2
     aTwoBtn.textContent = currentQuestion.options[1];
     aTwoBtn.value = currentQuestion.options[1];
 
+    //displays and sets value of question 3
     aThreeBtn.textContent = currentQuestion.options[2];
     aThreeBtn.value = currentQuestion.options[2];
 
+    //displays and sets value of question 4
     aFourBtn.textContent = currentQuestion.options[3];
     aFourBtn.value = currentQuestion.options[3];
-
 };
 
 function checkAnswer() {
-    console.log("button click " + this.value);
 
-    if(this.value === quizQuestions[index].answer) {
+    if(this.value === quizQuestions[i].answer) {
 
         score++;
     } else {
@@ -103,17 +117,25 @@ function checkAnswer() {
         timer = timer - 10;
     }
 
-    index++;
+    i++;
 
-    if (index === quizQuestions.length) {
+    console.log(score);
 
-        scoreBoard();
+    if (i === quizQuestions.length) {
+        quiz.classList.add("d-none");
+        displayScore.classList.remove("d-none");
 
+        i = 0;
+        
+        nextQuestion();
+        saveScore();
     } else {
 
         nextQuestion();
     }
 };
+
+
 
 function scoreBoard(){
     alert("GAME OVER");
@@ -134,11 +156,26 @@ function saveScore(){
 
     // localStorage.setItem("playerScoreList", JSON.stringify(playerScores));
     // /// JSON.parse 
-
-
 };
 
 
+startBtn.addEventListener("click", function(){
+    startBtn.classList.add("d-none");
+    quiz.classList.remove("d-none");
+
+});
+
+tryAgainBtn.addEventListener("click", function(){
+    playerScores.classList.add("d-none");
+    quiz.classList.remove("d-none");
+
+});
+
+submitScoreBtn.addEventListener("click", function(){
+    displayScore.classList.add("d-none");
+    playerScores.classList.remove("d-none");
+
+});
 
 aOneBtn.addEventListener("click", checkAnswer);
 aTwoBtn.addEventListener("click", checkAnswer);
