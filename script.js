@@ -96,9 +96,15 @@ var storedNames= [];
 var storedScores= [];
 
 
+
+
+var clearableScores = document.getElementsByClassName("clearable");
+
 //// Variables ^
 
 loadPS();
+
+console.log(clearableScores);
 
 function startTimer(){
 
@@ -206,12 +212,6 @@ function loadPS(){
     var displayStoredNames = JSON.parse(localStorage.getItem("name"));
     var displayStoredScores = JSON.parse(localStorage.getItem("score"));
 
-    
-
-
-    console.log(displayStoredScores);
-    console.log(displayStoredNames);
-
     var i = 0;
 
     if(displayStoredScores !== null && displayStoredNames !== null){
@@ -232,7 +232,7 @@ function loadPS(){
 function createNappend(){
     var newRow = document.createElement("div");
     newRow.setAttribute("id", "wrapper-row"); 
-    newRow.setAttribute("class", "row bg-light"); 
+    newRow.setAttribute("class", "row bg-light clearable"); 
     document.getElementById("playerScores").insertBefore(newRow, document.getElementById("playerScores").children[2]);
 
     var newColOne = document.createElement("div");
@@ -278,6 +278,14 @@ tryAgainBtn.addEventListener("click", function(){
 clearPS.addEventListener("click", function(event){
     event.preventDefault();
     localStorage.clear();
+
+    var i = 0;
+
+    while(i < clearableScores.length || i === 0){
+        clearableScores[0].remove();
+    }
+
+
 });
 
 submitScoreBtn.addEventListener("click", saveScore);
