@@ -91,20 +91,14 @@ var i = 0;
 
 var newPlayerScore;
 var playerName;
-
 var storedNames= [];
 var storedScores= [];
-
-
-
 
 var clearableScores = document.getElementsByClassName("clearable");
 
 //// Variables ^
 
 loadPS();
-
-console.log(clearableScores);
 
 function startTimer(){
 
@@ -284,18 +278,16 @@ clearPS.addEventListener("click", function(event){
     while(i < clearableScores.length || i === 0){
         clearableScores[0].remove();
     }
-
-
 });
 
 submitScoreBtn.addEventListener("click", saveScore);
 submitScoreBtn.addEventListener("click", function(){
+
     displayScore.classList.add("d-none");
     playerScores.classList.remove("d-none");
 
     document.getElementById("playerName").value = "";
     document.getElementById("gameTime").textContent = "Time: 180";
-
 });
 
 viewPS.addEventListener("click", function(){
@@ -319,5 +311,4 @@ aTwoBtn.addEventListener("click", checkAnswer);
 aThreeBtn.addEventListener("click", checkAnswer);
 aFourBtn.addEventListener("click", checkAnswer);
 
-// document.getElementById("submitBtn").onclick = saveScore;
 nextQuestion();
