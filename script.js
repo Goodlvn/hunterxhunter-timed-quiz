@@ -114,10 +114,8 @@ function startTimer(){
             stopGame();
         }
 
-    }, 1000);
-
-    
-}
+    }, 1000);   
+};
 
 function nextQuestion() {
     var currentQuestion = quizQuestions[i];
@@ -248,7 +246,7 @@ function createNappend(){
     newScore.setAttribute("class", "text-center p-2");
     newScore.textContent = newPlayerScore;
     newColTwo.append(newScore);
-}
+};
 
 //event listeners for buttons and functions
 startBtn.addEventListener("click", function(){
